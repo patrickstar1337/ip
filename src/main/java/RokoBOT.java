@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 public class RokoBOT {
     List<Task> localdb;
@@ -7,6 +8,18 @@ public class RokoBOT {
     public RokoBOT() {
         localdb = new ArrayList<>();
         printGreeting();
+    }
+
+    public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
+        String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
+                "todo", "deadline", "event", "bye"};
+        if (input.length() <= 1 || input.split(" ").length < 1 ||
+                !Arrays.asList(validCommands).contains(input.split(" ")[0])) {
+            throw new RokoUnknownCommandException("Error: Empty or not a valid command");
+        }
+        if (input.split(" ").length == 1) {
+            throw new RokoEmptyDescException("Error: No description given");
+        }
     }
 
     public void addTodo(String description) {

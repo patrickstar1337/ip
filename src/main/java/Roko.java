@@ -4,11 +4,19 @@ public class Roko {
     public static void main(String[] args) {
         RokoBOT roko = new RokoBOT();
         Scanner scan = new Scanner(System.in);
-//        String[] validCommands = new String[] {"mark", "unmark", "list", "bye", "todo", "deadline", "event"};
         while (true) {
             String userInput = scan.nextLine();
-            String command = userInput.split(" ")[0];
+            String command = "";
 
+            // Check for valid command
+            try {
+                RokoBOT.checkValidInput(userInput);
+                command = userInput.split(" ")[0];
+            } catch (RokoEmptyDescException | RokoUnknownCommandException e) {
+                System.out.println(e.getMessage());
+            }
+
+            // Commands for ROKO
             if (command.equalsIgnoreCase("mark")) {
                 int id = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 roko.mark(id);
