@@ -31,39 +31,10 @@ public class Roko {
                 String dateFrom = s[1].substring(5);
                 String dateTo = s[2].substring(3);
                 roko.addEvent(description, dateFrom, dateTo);
+            } else if (command.equalsIgnoreCase("bye")) {
+                System.out.println("Good Bye!");
+                break;
             }
-
-//            if (userInput.toLowerCase().contains("mark")) {
-//                String[] temp = userInput.split(" ");
-//                String command = temp[0];
-//                int taskNo = Integer.parseInt(temp[1]) - 1;
-//                if (command.equals("mark")) {
-//                    localdb.get(taskNo).isDone = true;
-//                    System.out.println("I've marked this as done:");
-//                    System.out.println("[" + localdb.get(taskNo).getStatusIcon() + "] " +
-//                            localdb.get(taskNo).description);
-//                } else {
-//                    localdb.get(taskNo).isDone = false;
-//                    System.out.println("I've marked this as NOT done yet:");
-//                    System.out.println("[" + localdb.get(taskNo).getStatusIcon() + "] " +
-//                            localdb.get(taskNo).description);
-//                }
-//                continue;
-//            }
-//            if (userInput.equalsIgnoreCase("bye")) {
-//                System.out.println(formatLine + "Bye. Hope to see you again!" + formatLine);
-//                break;
-//            } else if (userInput.equalsIgnoreCase("list")) {
-//                int count = 1;
-//                for (Task task : localdb) {
-//                    System.out.println(count + ".[" + task.getStatusIcon() + "] " + task.description);
-//                    count++;
-//                }
-//            } else {
-//                System.out.println(formatLine + "added: " + userInput + formatLine);
-//                Task t = new Task(userInput);
-//                localdb.add(t);
-//            }
         }
     }
 }
