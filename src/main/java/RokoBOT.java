@@ -12,12 +12,14 @@ public class RokoBOT {
 
     public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
         String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
-                "todo", "deadline", "event", "bye"};
+                "todo", "deadline", "event", "bye", "delete"};
         if (input.length() <= 1 || input.split(" ").length < 1 ||
                 !Arrays.asList(validCommands).contains(input.split(" ")[0])) {
             throw new RokoUnknownCommandException("Error: Empty or not a valid command");
         }
-        if (input.split(" ").length == 1) {
+        String command = input.split(" ")[0];
+        if (input.split(" ").length == 1 && !command.equalsIgnoreCase("list")
+                && !command.equalsIgnoreCase("bye")) {
             throw new RokoEmptyDescException("Error: No description given");
         }
     }
@@ -63,6 +65,14 @@ public class RokoBOT {
         task.isDone = false;
         String message = "Alright, I've marked this as NOT done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task.description;
+        printMessage(message);
+    }
+
+    public void delete(int id) {
+        Task task = localdb.get(id);
+        localdb.remove(task);
+        String message = String.format("I have deleted your task:\n[%s][%s] %s\nNow you have %o tasks left",
+                task.getTaskType(), task.getStatusIcon(), task.description, getTotalTasks());
         printMessage(message);
     }
 

@@ -39,6 +39,9 @@ public class Roko {
                 String dateFrom = s[1].substring(5);
                 String dateTo = s[2].substring(3);
                 roko.addEvent(description, dateFrom, dateTo);
+            } else if (command.equalsIgnoreCase("delete")) {
+                int id = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                roko.delete(id);
             } else if (command.equalsIgnoreCase("bye")) {
                 System.out.println("Good Bye!");
                 break;
