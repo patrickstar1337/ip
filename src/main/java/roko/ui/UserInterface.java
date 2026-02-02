@@ -1,3 +1,5 @@
+package roko.ui;
+
 public class UserInterface {
     public UserInterface() {
 
