@@ -1,7 +1,15 @@
 import java.util.*;
 
 public class Roko {
-    public static void main(String[] args) {
+
+    private Ui ui;
+
+    public Roko() {
+        ui = new Ui();
+        ui.printGreeting();
+    }
+
+    public void run() {
         RokoBOT roko = new RokoBOT();
         Storage rokoData = new Storage();
         Scanner scan = new Scanner(System.in);
@@ -49,5 +57,9 @@ public class Roko {
                 break;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Roko().run();
     }
 }
