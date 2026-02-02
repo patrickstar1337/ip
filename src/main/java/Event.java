@@ -3,7 +3,7 @@ public class Event extends Task {
     public String dateTo;
 
     public Event(String description, String dateFrom, String dateTo) {
-        super(description + " from: (" + dateFrom + " to: " + dateTo + ")");
+        super(description);
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
     }
@@ -11,5 +11,10 @@ public class Event extends Task {
     @Override
     public String getTaskType() {
         return "E";
+    }
+
+    @Override
+    public String toString() {
+        return this.description + " from: (" + dateFrom + " to: " + dateTo + ")";
     }
 }
