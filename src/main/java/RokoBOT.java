@@ -1,16 +1,15 @@
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
 public class RokoBOT {
     List<Task> localdb;
-    RokoDatabase rokoData = new RokoDatabase();
+    Storage rokoData = new Storage();
 
     public RokoBOT() {
         localdb = new ArrayList<>();
-        RokoDatabase rokoData = new RokoDatabase();
+        Storage rokoData = new Storage();
         try {
             rokoData.initialise(localdb);
         } catch (FileNotFoundException e) {

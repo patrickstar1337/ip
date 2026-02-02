@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class RokoDatabase {
-    public RokoDatabase() {
+public class Storage {
+    public Storage() {
 
     }
 

@@ -3,7 +3,7 @@ import java.util.*;
 public class Roko {
     public static void main(String[] args) {
         RokoBOT roko = new RokoBOT();
-        RokoDatabase rokoData = new RokoDatabase();
+        Storage rokoData = new Storage();
         Scanner scan = new Scanner(System.in);
         while (true) {
             String userInput = scan.nextLine();
