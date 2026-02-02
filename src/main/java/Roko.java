@@ -3,6 +3,7 @@ import java.util.*;
 public class Roko {
     public static void main(String[] args) {
         RokoBOT roko = new RokoBOT();
+        RokoDatabase rokoData = new RokoDatabase();
         Scanner scan = new Scanner(System.in);
         while (true) {
             String userInput = scan.nextLine();
@@ -43,6 +44,7 @@ public class Roko {
                 int id = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 roko.delete(id);
             } else if (command.equalsIgnoreCase("bye")) {
+                roko.save();
                 System.out.println("Good Bye!");
                 break;
             }

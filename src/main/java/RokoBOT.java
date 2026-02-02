@@ -1,12 +1,20 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
 public class RokoBOT {
     List<Task> localdb;
+    RokoDatabase rokoData = new RokoDatabase();
 
     public RokoBOT() {
         localdb = new ArrayList<>();
+        RokoDatabase rokoData = new RokoDatabase();
+        try {
+            rokoData.initialise(localdb);
+        } catch (FileNotFoundException e) {
+            rokoData.save(localdb);
+        }
         printGreeting();
     }
 
@@ -56,7 +64,7 @@ public class RokoBOT {
         Task task = localdb.get(id);
         task.isDone = true;
         String message = "Nice! I've marked this as done: " + "\n" + "[" +
-                task.getStatusIcon() + "] " + task.description;
+                task.getStatusIcon() + "] " + task;
         printMessage(message);
     }
 
@@ -64,7 +72,7 @@ public class RokoBOT {
         Task task = localdb.get(id);
         task.isDone = false;
         String message = "Alright, I've marked this as NOT done: " + "\n" + "[" +
-                task.getStatusIcon() + "] " + task.description;
+                task.getStatusIcon() + "] " + task;
         printMessage(message);
     }
 
@@ -74,6 +82,10 @@ public class RokoBOT {
         String message = String.format("I have deleted your task:\n[%s][%s] %s\nNow you have %o tasks left",
                 task.getTaskType(), task.getStatusIcon(), task.description, getTotalTasks());
         printMessage(message);
+    }
+
+    public void save() {
+        rokoData.save(localdb);
     }
 
     public void printGreeting() {
@@ -91,7 +103,7 @@ public class RokoBOT {
         int count = 1;
         for (Task task : localdb) {
             String row = String.format("%o.[%s][%s] %s", count, task.getTaskType(), task.getStatusIcon(),
-                    task.description);
+                    task);
             message += row + "\n";
             count++;
         }
