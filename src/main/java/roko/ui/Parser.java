@@ -1,3 +1,5 @@
+package roko.ui;
+
 public class Parser {
     private RokoBOT roko = new RokoBOT();
     public static boolean isDone = false;
