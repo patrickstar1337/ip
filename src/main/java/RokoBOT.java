@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class RokoBOT {
     List<Task> localdb;
     Storage rokoData = new Storage();
-    Ui ui = new Ui();
+    UserInterface ui = new UserInterface();
 
     public RokoBOT() {
         localdb = new ArrayList<>();

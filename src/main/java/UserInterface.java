@@ -1,5 +1,5 @@
-public class Ui {
-    public Ui() {
+public class UserInterface {
+    public UserInterface() {
 
     }
 

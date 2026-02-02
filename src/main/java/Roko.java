@@ -2,10 +2,10 @@ import java.util.*;
 
 public class Roko {
 
-    private Ui ui;
+    private UserInterface ui;
 
     public Roko() {
-        ui = new Ui();
+        ui = new UserInterface();
         ui.printGreeting();
     }
 
