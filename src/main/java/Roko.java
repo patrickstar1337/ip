@@ -37,7 +37,7 @@ public class Roko {
             } else if (command.equalsIgnoreCase("event")) {
                 String[] s = userInput.substring(6).split("/");
                 String description = s[0].substring(0, s[0].length() - 1);
-                String dateFrom = s[1].substring(5);
+                String dateFrom = s[1].substring(5, s[1].length() - 1);
                 String dateTo = s[2].substring(3);
                 roko.addEvent(description, dateFrom, dateTo);
             } else if (command.equalsIgnoreCase("delete")) {
