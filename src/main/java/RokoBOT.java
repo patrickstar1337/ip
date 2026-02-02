@@ -1,22 +1,22 @@
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
 public class RokoBOT {
     List<Task> localdb;
-    RokoDatabase rokoData = new RokoDatabase();
+    TaskList tasks;
+    Storage rokoData = new Storage();
+    UserInterface ui = new UserInterface();
 
     public RokoBOT() {
         localdb = new ArrayList<>();
-        RokoDatabase rokoData = new RokoDatabase();
+        Storage rokoData = new Storage();
         try {
-            rokoData.initialise(localdb);
+            tasks = new TaskList(rokoData.initialise());
         } catch (FileNotFoundException e) {
-            rokoData.save(localdb);
+            tasks = new TaskList();
         }
-        printGreeting();
     }
 
     public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
@@ -35,79 +35,69 @@ public class RokoBOT {
 
     public void addTodo(String description) {
         Todo todo = new Todo(description);
-        localdb.add(todo);
+        tasks.add(todo);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 todo.getTaskType(), todo.getStatusIcon(), todo.description, getTotalTasks());
-        printMessage(message);
+        ui.printMessage(message);
     }
 
     public void addDeadline(String description, String date) {
         Deadline deadline = new Deadline(description, date);
-        localdb.add(deadline);
+        tasks.add(deadline);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 deadline.getTaskType(), deadline.getStatusIcon(), deadline.description, getTotalTasks());
-        printMessage(message);
+        ui.printMessage(message);
     }
 
     public void addEvent(String description, String dateFrom, String dateTo) {
         Event event = new Event(description, dateFrom, dateTo);
-        localdb.add(event);
+        tasks.add(event);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 event.getTaskType(), event.getStatusIcon(), event.description, getTotalTasks());
-        printMessage(message);
+        ui.printMessage(message);
     }
 
     public int getTotalTasks() {
-        return localdb.size();
+        return tasks.size();
     }
 
     public void mark(int id) {
-        Task task = localdb.get(id);
+        Task task = tasks.getTaskById(id);
         task.isDone = true;
         String message = "Nice! I've marked this as done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
-        printMessage(message);
+        ui.printMessage(message);
     }
 
     public void unmark(int id) {
-        Task task = localdb.get(id);
+        Task task = tasks.getTaskById(id);
         task.isDone = false;
         String message = "Alright, I've marked this as NOT done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
-        printMessage(message);
+        ui.printMessage(message);
     }
 
     public void delete(int id) {
-        Task task = localdb.get(id);
-        localdb.remove(task);
+        Task task = tasks.getTaskById(id);
+        tasks.removeTaskById(id);
         String message = String.format("I have deleted your task:\n[%s][%s] %s\nNow you have %o tasks left",
                 task.getTaskType(), task.getStatusIcon(), task.description, getTotalTasks());
-        printMessage(message);
+        ui.printMessage(message);
     }
 
     public void save() {
-        rokoData.save(localdb);
-    }
-
-    public void printGreeting() {
-        System.out.println("Hello I'm ROKO");
-        System.out.println("What can I do for you?");
-    }
-
-    public void printMessage(String message) {
-        String formatLine = "------------------------------";
-        System.out.println(formatLine + "\n" + message + "\n" + formatLine);
+        tasks.save();
     }
 
     public void printAllTasks() {
-        String message = "Here are ALL your tasks:\n";
+        String message = "Here are ALL your tasks:";
         int count = 1;
-        for (Task task : localdb) {
+        for (Task task : tasks.getAllTasks()) {
             String row = String.format("%o.[%s][%s] %s", count, task.getTaskType(), task.getStatusIcon(),
                     task);
-            message += row + "\n";
+            message += "\n" + row;
             count++;
         }
-        printMessage(message);
+        ui.printMessage(message);
     }
 }

@@ -2,15 +2,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RokoDatabase {
-    public RokoDatabase() {
+public class Storage {
+    public Storage() {
 
     }
 
-    public void initialise(List<Task> localdb) throws FileNotFoundException {
+    public List<Task> initialise() throws FileNotFoundException {
+        List<Task> localdb = new ArrayList<>();
         File f = new File("data/tasks.txt");
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -33,6 +35,7 @@ public class RokoDatabase {
                     break;
             }
         }
+        return localdb;
     }
 
     public void save(List<Task> localdb) {
