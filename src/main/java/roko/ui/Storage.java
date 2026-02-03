@@ -8,11 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Saves tasks' data into a text file located at data/tasks.txt.
+ */
 public class Storage {
     public Storage() {
 
     }
 
+    /**
+     * Loads data/tasks.txt into the program.
+     * If no file found, an empty new one will be created.
+     *
+     * @return List<Task> of tasks.
+     * @throws FileNotFoundException If file doesn't exist.
+     */
     public List<Task> initialise() throws FileNotFoundException {
         List<Task> localdb = new ArrayList<>();
         File f = new File("data/tasks.txt");
@@ -40,6 +50,9 @@ public class Storage {
         return localdb;
     }
 
+    /**
+     * Saves a given ArrayList of Tasks into data/tasks.txt
+     */
     public void save(List<Task> localdb) {
         StringBuilder data = new StringBuilder();
         for (Task t : localdb) {

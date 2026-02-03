@@ -2,17 +2,26 @@ package roko.ui;
 
 import java.util.*;
 
+/**
+ * Represents the main bot that will be running.
+ */
 public class Roko {
 
     private UserInterface ui;
     private Parser parser;
 
+    /**
+     * Creates the Roko bot for storing various tasks.
+     */
     public Roko() {
         ui = new UserInterface();
         parser = new Parser();
         ui.printGreeting();
     }
 
+    /**
+     * Runs the bot and takes in user inputs for various commands.
+     */
     public void run() {
         Scanner scan = new Scanner(System.in);
         do {
