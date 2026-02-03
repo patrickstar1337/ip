@@ -1,14 +1,20 @@
 package roko.ui;
 
+/**
+ * Represents the class that is responsible for taking user input.
+ */
 public class Parser {
     private RokoBOT roko = new RokoBOT();
     public static boolean isDone = false;
-
 
     public Parser() {
 
     }
 
+    /**
+     * Parses the user's input into commands that are then executed.
+     * @param c The user input String.
+     */
     public void parseCommand(String c) {
         String command = "";
 
