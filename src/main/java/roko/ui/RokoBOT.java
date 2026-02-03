@@ -21,6 +21,12 @@ public class RokoBOT {
         }
     }
 
+    /**
+     * Checks if the user input is a valid command.
+     * @param input The user input.
+     * @throws RokoUnknownCommandException If it's an unknown command.
+     * @throws RokoEmptyDescException If the description for the command is empty.
+     */
     public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
         String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
                 "todo", "deadline", "event", "bye", "delete", "find"};
@@ -35,6 +41,10 @@ public class RokoBOT {
         }
     }
 
+    /**
+     * Adds a To do task to the list.
+     * @param description The description of the task.
+     */
     public void addTodo(String description) {
         Todo todo = new Todo(description);
         tasks.add(todo);
@@ -43,6 +53,11 @@ public class RokoBOT {
         ui.printMessage(message);
     }
 
+    /**
+     * Adds a deadline task to the list.
+     * @param description The description of the task.
+     * @param date The deadline of the task.
+     */
     public void addDeadline(String description, String date) {
         Deadline deadline = new Deadline(description, date);
         tasks.add(deadline);
@@ -51,6 +66,12 @@ public class RokoBOT {
         ui.printMessage(message);
     }
 
+    /**
+     * Adds an event task to the list.
+     * @param description The description of the task.
+     * @param dateFrom The beginning date.
+     * @param dateTo The ending date.
+     */
     public void addEvent(String description, String dateFrom, String dateTo) {
         Event event = new Event(description, dateFrom, dateTo);
         tasks.add(event);
@@ -63,6 +84,10 @@ public class RokoBOT {
         return tasks.size();
     }
 
+    /**
+     * Marks a certain task as complete.
+     * @param id The task id.
+     */
     public void mark(int id) {
         Task task = tasks.getTaskById(id);
         task.isDone = true;
@@ -71,6 +96,10 @@ public class RokoBOT {
         ui.printMessage(message);
     }
 
+    /**
+     * Marks a certain task as incomplete.
+     * @param id The task id.
+     */
     public void unmark(int id) {
         Task task = tasks.getTaskById(id);
         task.isDone = false;
@@ -79,6 +108,10 @@ public class RokoBOT {
         ui.printMessage(message);
     }
 
+    /**
+     * Removes a task from the list.
+     * @param id The task id.
+     */
     public void delete(int id) {
         Task task = tasks.getTaskById(id);
         tasks.removeTaskById(id);
@@ -91,6 +124,9 @@ public class RokoBOT {
         tasks.save();
     }
 
+    /**
+     * Prints out all the tasks in the list.
+     */
     public void printAllTasks() {
         String message = "Here are ALL your tasks:";
         int count = 1;

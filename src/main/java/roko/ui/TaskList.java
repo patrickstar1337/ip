@@ -9,6 +9,7 @@ public class TaskList {
     public TaskList() {
         taskList = new ArrayList<>();
     }
+
     public TaskList(List<Task> t) {
         taskList = t;
     }
