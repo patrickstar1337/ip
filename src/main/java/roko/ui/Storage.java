@@ -20,21 +20,21 @@ public class Storage {
         while (s.hasNext()) {
             String[] task = s.nextLine().split("\\|");
             switch (task[0]) {
-                case "T":
-                    Todo t = new Todo(task[1]);
-                    t.isDone = task[2].equals("Y");
-                    localdb.add(t);
-                    break;
-                case "D":
-                    Deadline d = new Deadline(task[1], task[2]);
-                    d.isDone = task[3].equals("Y");
-                    localdb.add(d);
-                    break;
-                case "E":
-                    Event e = new Event(task[1], task[2], task[3]);
-                    e.isDone = task[4].equals("Y");
-                    localdb.add(e);
-                    break;
+            case "T":
+                Todo t = new Todo(task[1]);
+                t.isDone = task[2].equals("Y");
+                localdb.add(t);
+                break;
+            case "D":
+                Deadline d = new Deadline(task[1], task[2]);
+                d.isDone = task[3].equals("Y");
+                localdb.add(d);
+                break;
+            case "E":
+                Event e = new Event(task[1], task[2], task[3]);
+                e.isDone = task[4].equals("Y");
+                localdb.add(e);
+                break;
             }
         }
         return localdb;
@@ -46,25 +46,25 @@ public class Storage {
             String type = t.getTaskType();
             String isDone = t.isDone ? "Y" : "N";
             switch (type) {
-                case "T":
-                    // Type | Description | Is Done
-                    String todo = type + "|" + t.description + "|" + isDone + System.lineSeparator();
-                    data.append(todo);
-                    break;
-                case "D":
-                    // Type | Description | Date | Is Done
-                    Deadline d = (Deadline) t;
-                    String deadline = type + "|" + d.description + "|" + d.getDeadline() + "|" + isDone +
-                            System.lineSeparator();
-                    data.append(deadline);
-                    break;
-                case "E":
-                    // Type | Description | From Date | To Date | Is Done
-                    Event e = (Event) t;
-                    String event = type + "|" + e.description + "|" + e.dateFrom + "|" + e.dateTo + "|" + isDone +
-                            System.lineSeparator();
-                    data.append(event);
-                    break;
+            case "T":
+                // Type | Description | Is Done
+                String todo = type + "|" + t.description + "|" + isDone + System.lineSeparator();
+                data.append(todo);
+                break;
+            case "D":
+                // Type | Description | Date | Is Done
+                Deadline d = (Deadline) t;
+                String deadline = type + "|" + d.description + "|" + d.getDeadline() + "|" + isDone +
+                        System.lineSeparator();
+                data.append(deadline);
+                break;
+            case "E":
+                // Type | Description | From Date | To Date | Is Done
+                Event e = (Event) t;
+                String event = type + "|" + e.description + "|" + e.dateFrom + "|" + e.dateTo + "|" + isDone +
+                        System.lineSeparator();
+                data.append(event);
+                break;
             }
         }
 

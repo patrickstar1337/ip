@@ -22,7 +22,7 @@ public class RokoBOT {
     }
 
     public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
-        String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
+        String[] validCommands = new String[]{"mark", "unmark", "list", "bye",
                 "todo", "deadline", "event", "bye", "delete"};
         if (input.length() <= 1 || input.split(" ").length < 1 ||
                 !Arrays.asList(validCommands).contains(input.split(" ")[0])) {

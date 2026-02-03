@@ -30,7 +30,7 @@ public class Parser {
         } else if (command.equalsIgnoreCase("todo")) {
             String description = c.substring(5);
             roko.addTodo(description);
-        } else if (command.equalsIgnoreCase("list")){
+        } else if (command.equalsIgnoreCase("list")) {
             roko.printAllTasks();
         } else if (command.equalsIgnoreCase("deadline")) {
             String[] s = c.substring(9).split("/");
