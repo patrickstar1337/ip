@@ -28,8 +28,8 @@ public class RokoBOT {
      * @throws RokoEmptyDescException If the description for the command is empty.
      */
     public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
-        String[] validCommands = new String[]{"mark", "unmark", "list", "bye",
-                "todo", "deadline", "event", "bye", "delete"};
+        String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
+                "todo", "deadline", "event", "bye", "delete", "find"};
         if (input.length() <= 1 || input.split(" ").length < 1 ||
                 !Arrays.asList(validCommands).contains(input.split(" ")[0])) {
             throw new RokoUnknownCommandException("Error: Empty or not a valid command");
@@ -135,6 +135,23 @@ public class RokoBOT {
                     task);
             message += "\n" + row;
             count++;
+        }
+        ui.printMessage(message);
+    }
+
+    public void findByKeyword(String keyword) {
+        String message = "Here are the matching tasks in your list:";
+        int count = 0;
+        for (Task task : tasks.getAllTasks()) {
+            if (task.description.contains(keyword)) {
+                String row = String.format("%o.[%s][%s] %s", count + 1, task.getTaskType(), task.getStatusIcon(),
+                        task);
+                message += "\n" + row;
+                count++;
+            }
+        }
+        if (count == 0) {
+            message = "No task matched that keyword!";
         }
         ui.printMessage(message);
     }
