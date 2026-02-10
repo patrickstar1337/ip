@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClass.set("roko.ui.Roko")
+    mainClass.set("roko.ui.Launcher")
 }
 
 shadowJar {

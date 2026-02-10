@@ -30,7 +30,14 @@ public class Roko {
         } while (!Parser.isDone);
     }
 
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Roko heard: " + input;
+    }
+
     public static void main(String[] args) {
-        new Roko().run();
+//        new Roko().run();
     }
 }
