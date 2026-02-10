@@ -45,12 +45,13 @@ public class RokoBOT {
      * Adds a To do task to the list.
      * @param description The description of the task.
      */
-    public void addTodo(String description) {
+    public String addTodo(String description) {
         Todo todo = new Todo(description);
         tasks.add(todo);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 todo.getTaskType(), todo.getStatusIcon(), todo.description, getTotalTasks());
         ui.printMessage(message);
+        return message;
     }
 
     /**
@@ -58,12 +59,13 @@ public class RokoBOT {
      * @param description The description of the task.
      * @param date The deadline of the task.
      */
-    public void addDeadline(String description, String date) {
+    public String addDeadline(String description, String date) {
         Deadline deadline = new Deadline(description, date);
         tasks.add(deadline);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 deadline.getTaskType(), deadline.getStatusIcon(), deadline.description, getTotalTasks());
         ui.printMessage(message);
+        return message;
     }
 
     /**
@@ -72,12 +74,13 @@ public class RokoBOT {
      * @param dateFrom The beginning date.
      * @param dateTo The ending date.
      */
-    public void addEvent(String description, String dateFrom, String dateTo) {
+    public String addEvent(String description, String dateFrom, String dateTo) {
         Event event = new Event(description, dateFrom, dateTo);
         tasks.add(event);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 event.getTaskType(), event.getStatusIcon(), event.description, getTotalTasks());
         ui.printMessage(message);
+        return message;
     }
 
     public int getTotalTasks() {
@@ -88,36 +91,39 @@ public class RokoBOT {
      * Marks a certain task as complete.
      * @param id The task id.
      */
-    public void mark(int id) {
+    public String mark(int id) {
         Task task = tasks.getTaskById(id);
         task.isDone = true;
         String message = "Nice! I've marked this as done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
         ui.printMessage(message);
+        return message;
     }
 
     /**
      * Marks a certain task as incomplete.
      * @param id The task id.
      */
-    public void unmark(int id) {
+    public String unmark(int id) {
         Task task = tasks.getTaskById(id);
         task.isDone = false;
         String message = "Alright, I've marked this as NOT done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
         ui.printMessage(message);
+        return message;
     }
 
     /**
      * Removes a task from the list.
      * @param id The task id.
      */
-    public void delete(int id) {
+    public String delete(int id) {
         Task task = tasks.getTaskById(id);
         tasks.removeTaskById(id);
         String message = String.format("I have deleted your task:\n[%s][%s] %s\nNow you have %o tasks left",
                 task.getTaskType(), task.getStatusIcon(), task.description, getTotalTasks());
         ui.printMessage(message);
+        return message;
     }
 
     public void save() {
@@ -127,7 +133,7 @@ public class RokoBOT {
     /**
      * Prints out all the tasks in the list.
      */
-    public void printAllTasks() {
+    public String printAllTasks() {
         String message = "Here are ALL your tasks:";
         int count = 1;
         for (Task task : tasks.getAllTasks()) {
@@ -137,9 +143,10 @@ public class RokoBOT {
             count++;
         }
         ui.printMessage(message);
+        return message;
     }
 
-    public void findByKeyword(String keyword) {
+    public String findByKeyword(String keyword) {
         String message = "Here are the matching tasks in your list:";
         int count = 0;
         for (Task task : tasks.getAllTasks()) {
@@ -154,5 +161,6 @@ public class RokoBOT {
             message = "No task matched that keyword!";
         }
         ui.printMessage(message);
+        return message;
     }
 }
