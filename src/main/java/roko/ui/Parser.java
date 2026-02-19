@@ -55,6 +55,8 @@ public class Parser {
             return roko.delete(id);
         } else if (command.equalsIgnoreCase("find")) {
             return roko.findByKeyword(c.split(" ")[1]);
+        } else if (command.equalsIgnoreCase("undo")) {
+            return roko.undo();
         } else if (command.equalsIgnoreCase("bye")) {
             roko.save();
             Parser.isDone = true;

@@ -10,6 +10,7 @@ public class RokoBOT {
     TaskList tasks;
     Storage rokoData = new Storage();
     UserInterface ui = new UserInterface();
+    UndoBuffer undoBuffer = new UndoBuffer();
 
     public RokoBOT() {
         localdb = new ArrayList<>();
@@ -29,14 +30,14 @@ public class RokoBOT {
      */
     public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
         String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
-                "todo", "deadline", "event", "bye", "delete", "find"};
+                "todo", "deadline", "event", "bye", "delete", "find", "undo"};
         if (input.length() <= 1 || input.split(" ").length < 1 ||
                 !Arrays.asList(validCommands).contains(input.split(" ")[0])) {
             throw new RokoUnknownCommandException("Error: Empty or not a valid command");
         }
         String command = input.split(" ")[0];
         if (input.split(" ").length == 1 && !command.equalsIgnoreCase("list")
-                && !command.equalsIgnoreCase("bye")) {
+                && !command.equalsIgnoreCase("bye") && !command.equalsIgnoreCase("undo")) {
             throw new RokoEmptyDescException("Error: No description given");
         }
     }
@@ -51,6 +52,7 @@ public class RokoBOT {
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 todo.getTaskType(), todo.getStatusIcon(), todo.description, getTotalTasks());
         ui.printMessage(message);
+        undoBuffer.push(new UndoAdd());
         return message;
     }
 
@@ -65,6 +67,7 @@ public class RokoBOT {
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 deadline.getTaskType(), deadline.getStatusIcon(), deadline.description, getTotalTasks());
         ui.printMessage(message);
+        undoBuffer.push(new UndoAdd());
         return message;
     }
 
@@ -80,6 +83,7 @@ public class RokoBOT {
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 event.getTaskType(), event.getStatusIcon(), event.description, getTotalTasks());
         ui.printMessage(message);
+        undoBuffer.push(new UndoAdd());
         return message;
     }
 
@@ -93,6 +97,7 @@ public class RokoBOT {
      */
     public String mark(int id) {
         Task task = tasks.getTaskById(id);
+        undoBuffer.push(new UndoMark(id, task.isDone));
         task.isDone = true;
         String message = "Nice! I've marked this as done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
@@ -106,6 +111,7 @@ public class RokoBOT {
      */
     public String unmark(int id) {
         Task task = tasks.getTaskById(id);
+        undoBuffer.push(new UndoMark(id, task.isDone));
         task.isDone = false;
         String message = "Alright, I've marked this as NOT done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
@@ -123,6 +129,7 @@ public class RokoBOT {
         String message = String.format("I have deleted your task:\n[%s][%s] %s\nNow you have %o tasks left",
                 task.getTaskType(), task.getStatusIcon(), task.description, getTotalTasks());
         ui.printMessage(message);
+        undoBuffer.push(new UndoDelete(id, task));
         return message;
     }
 
@@ -162,5 +169,17 @@ public class RokoBOT {
         }
         ui.printMessage(message);
         return message;
+    }
+
+    /**
+     * Undo the most recent command
+     */
+    public String undo() {
+        try {
+            undoBuffer.undo(tasks);
+        } catch (IllegalStateException e) {
+            return e.getMessage();
+        }
+        return "Last action undone!";
     }
 }
