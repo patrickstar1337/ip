@@ -18,6 +18,10 @@ public class TaskList {
         taskList.add(t);
     }
 
+    public void addById(int id, Task t) {
+        taskList.add(id, t);
+    }
+
     public int size() {
         return taskList.size();
     }
