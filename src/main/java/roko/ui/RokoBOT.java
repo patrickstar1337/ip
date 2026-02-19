@@ -48,10 +48,12 @@ public class RokoBOT {
      */
     public String addTodo(String description) {
         Todo todo = new Todo(description);
+        int before = getTotalTasks();
         tasks.add(todo);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 todo.getTaskType(), todo.getStatusIcon(), todo.description, getTotalTasks());
         ui.printMessage(message);
+        assert getTotalTasks() == before + 1 : "adding a task should increase it by 1";
         undoBuffer.push(new UndoAdd());
         return message;
     }
@@ -63,11 +65,13 @@ public class RokoBOT {
      */
     public String addDeadline(String description, String date) {
         Deadline deadline = new Deadline(description, date);
+        int before = getTotalTasks();
         tasks.add(deadline);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 deadline.getTaskType(), deadline.getStatusIcon(), deadline.description, getTotalTasks());
         ui.printMessage(message);
         undoBuffer.push(new UndoAdd());
+        assert getTotalTasks() == before + 1 : "adding a task should increase it by 1";
         return message;
     }
 
@@ -79,11 +83,13 @@ public class RokoBOT {
      */
     public String addEvent(String description, String dateFrom, String dateTo) {
         Event event = new Event(description, dateFrom, dateTo);
+        int before = getTotalTasks();
         tasks.add(event);
         String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
                 event.getTaskType(), event.getStatusIcon(), event.description, getTotalTasks());
         ui.printMessage(message);
         undoBuffer.push(new UndoAdd());
+        assert getTotalTasks() == before + 1 : "adding a task should increase it by 1";
         return message;
     }
 
@@ -102,6 +108,7 @@ public class RokoBOT {
         String message = "Nice! I've marked this as done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
         ui.printMessage(message);
+        assert task.isDone : "task should be marked done";
         return message;
     }
 
@@ -116,6 +123,8 @@ public class RokoBOT {
         String message = "Alright, I've marked this as NOT done: " + "\n" + "[" +
                 task.getStatusIcon() + "] " + task;
         ui.printMessage(message);
+        assert !task.isDone : "task should NOT be done";
+        assert false;
         return message;
     }
 
