@@ -24,13 +24,13 @@ public class MainWindow extends AnchorPane {
     private Roko roko;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image rokoImage = new Image(this.getClass().getResourceAsStream("/images/Roko.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Welcome I'm ROKO.\nWhat can I do for you?", dukeImage)
+                DialogBox.getDukeDialog("Welcome I'm ROKO.\nWhat can I do for you?", rokoImage)
         );
     }
 
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, rokoImage)
         );
         userInput.clear();
     }
