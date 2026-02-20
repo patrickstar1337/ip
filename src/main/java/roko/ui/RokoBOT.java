@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Set;
 
 public class RokoBOT {
     List<Task> localdb;
@@ -28,17 +29,43 @@ public class RokoBOT {
      * @throws RokoUnknownCommandException If it's an unknown command.
      * @throws RokoEmptyDescException If the description for the command is empty.
      */
-    public static void checkValidInput(String input) throws RokoUnknownCommandException, RokoEmptyDescException {
-        String[] validCommands = new String[] {"mark", "unmark", "list", "bye",
-                "todo", "deadline", "event", "bye", "delete", "find", "undo"};
-        if (input.length() <= 1 || input.split(" ").length < 1 ||
-                !Arrays.asList(validCommands).contains(input.split(" ")[0])) {
+    /*
+    Asked ChatGPT to improve the structure and quality of this code
+     */
+    public static void checkValidInput(String input)
+            throws RokoUnknownCommandException, RokoEmptyDescException {
+
+        if (input == null) {
             throw new RokoUnknownCommandException("Error: Empty or not a valid command");
         }
-        String command = input.split(" ")[0];
-        if (input.split(" ").length == 1 && !command.equalsIgnoreCase("list")
-                && !command.equalsIgnoreCase("bye") && !command.equalsIgnoreCase("undo")) {
-            throw new RokoEmptyDescException("Error: No description given");
+
+        String trimmed = input.trim();
+        if (trimmed.isEmpty()) {
+            throw new RokoUnknownCommandException("Error: Empty or not a valid command");
+        }
+
+        // Split into at most 2 parts: command + the rest (arguments)
+        String[] parts = trimmed.split("\\s+", 2);
+        String command = parts[0].toLowerCase();
+
+        Set<String> validCommands = Set.of(
+                "mark", "unmark", "list", "bye",
+                "todo", "deadline", "event",
+                "delete", "find", "undo"
+        );
+
+        if (!validCommands.contains(command)) {
+            throw new RokoUnknownCommandException("Error: Empty or not a valid command");
+        }
+
+        // Commands that DON'T require arguments
+        Set<String> noArgCommands = Set.of("list", "bye", "undo");
+
+        if (!noArgCommands.contains(command)) {
+            String args = (parts.length == 2) ? parts[1].trim() : "";
+            if (args.isEmpty()) {
+                throw new RokoEmptyDescException("Error: No description given");
+            }
         }
     }
 
