@@ -1,6 +1,6 @@
 # ROKO's User Guide
 
-![screenshot](Ui.png)
+<img src=Ui.png height="400">
 
 ROKO is a cutting edge last generation software that helps you keep track of your various tasks 
 so that you won't forget it.
