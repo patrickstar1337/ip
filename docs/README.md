@@ -1,30 +1,54 @@
-# roko.ui.Roko User Guide
+# ROKO's User Guide
 
-// Update the title above to match the actual product name
+![screenshot](Ui.png)
 
-// Product screenshot goes here
+ROKO is a cutting edge last generation software that helps you keep track of your various tasks 
+so that you won't forget it.
 
-// Product intro goes here
+## Commands
 
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
-```
-expected output
+### todo
+Adds a simple reminder with a single description  
+Usage: `todo [description]`  
+Example: `todo Buy a pencil`  
+```text
+[T][] Buy a pencil
 ```
 
-## Feature ABC
+### deadline
+Adds a simple reminder with a description and a deadline  
+Usage: `deadilne [description] /by [yyyy-mm-dd]`  
+Example: `deadline Submit homework /by 2026-02-20`
+```text
+[D][] Submit homework (by: Feb 20 2026)
+```
 
-// Feature details
+### deadline
+Adds a simple reminder with a description and a from and to date  
+Usage: `event [description] /from [yyyy-mm-dd] /to [yyyy-mm-dd]`  
+Example: `event cry /from 2026-01-01 /to 2026-12-31`
+```text
+[E][] cry from:(Jan 1 2026 to: Dec 31 2026)
+```
 
+### undo
+Undoes the previous command  
+Usage: `undo`  
+Example: `undo`  
 
-## Feature XYZ
+### mark / unmark
+Marks a tasks complete or incomplete  
+Usage: `mark [int]` or `unmark [int]`  
+Example: `mark 1` then `unmark 1`
+```text
+[T][X] Buy a pencil
+[T][] Buy a pencil
+```
 
-// Feature details
+### bye
+Exits and terminates the program  
+Usage: `bye`  
+Example: `bye`
+```text
+
+```
