@@ -1,6 +1,6 @@
 # ROKO's User Guide
 
-<img src=Ui.png height="400">
+<img src="https://raw.githubusercontent.com/patrickstar1337/ip/refs/heads/master/docs/Ui.png" height="450">
 
 ROKO is a cutting edge last generation software that helps you keep track of your various tasks 
 so that you won't forget it.
