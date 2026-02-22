@@ -160,6 +160,9 @@ public class RokoBOT {
      * @param id The task id.
      */
     public String delete(int id) {
+        if (id >= tasks.size() || id <= 0) {
+            return "That item does not exist!";
+        }
         Task task = tasks.getTaskById(id);
         tasks.removeTaskById(id);
         String message = String.format("I have deleted your task:\n[%s][%s] %s\nNow you have %o tasks left",
