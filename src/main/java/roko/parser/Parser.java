@@ -1,4 +1,8 @@
-package roko.ui;
+package roko.parser;
+
+import roko.exception.RokoEmptyDescException;
+import roko.exception.RokoUnknownCommandException;
+import roko.ui.RokoBOT;
 
 /**
  * Represents the class that is responsible for taking user input.

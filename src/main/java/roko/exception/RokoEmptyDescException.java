@@ -1,4 +1,4 @@
-package roko.ui;
+package roko.exception;
 
 public class RokoEmptyDescException extends Exception {
     public RokoEmptyDescException(String message) {

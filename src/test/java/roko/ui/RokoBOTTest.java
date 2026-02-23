@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import roko.exception.RokoEmptyDescException;
+import roko.exception.RokoUnknownCommandException;
+
 public class RokoBOTTest {
     @Test
     public void parseCommand_unknownCommand_exceptionThrown() {

@@ -1,4 +1,4 @@
-package roko.ui;
+package roko.exception;
 
 public class RokoUnknownCommandException extends Exception {
     public RokoUnknownCommandException(String message) {

@@ -4,8 +4,11 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 import java.util.Set;
+
+import roko.exception.RokoEmptyDescException;
+import roko.exception.RokoUnknownCommandException;
+import roko.storage.Storage;
 
 public class RokoBOT {
     List<Task> localdb;
@@ -165,7 +168,7 @@ public class RokoBOT {
      * @param id The task id.
      */
     public String delete(int id) {
-        if (id >= tasks.size() || id <= 0) {
+        if (id >= tasks.size() || id < 0) {
             return "That item does not exist!";
         }
         Task task = tasks.getTaskById(id);

@@ -3,6 +3,8 @@ package roko.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import roko.storage.Storage;
+
 public class TaskList {
     private List<Task> taskList;
 

@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import roko.parser.Parser;
+
 /**
  * Controller for the main GUI.
  */
