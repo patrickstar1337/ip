@@ -24,7 +24,6 @@ public class Parser {
             command = c.split(" ")[0];
         } catch (RokoEmptyDescException | RokoUnknownCommandException e) {
             return e.getMessage();
-//            System.out.println(e.getMessage());
         }
 
         // Commands for ROKO

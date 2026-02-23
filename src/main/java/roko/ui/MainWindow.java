@@ -47,7 +47,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         Parser parser = new Parser();
         String input = userInput.getText();
-//        String response = roko.getResponse(input);
         String response = parser.parseCommand(input);
         if (input.equalsIgnoreCase("bye")) {
             Platform.exit();

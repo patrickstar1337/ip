@@ -115,9 +115,6 @@ public class RokoBOT {
      * @param dateTo The ending date.
      */
     public String addEvent(String description, String dateFrom, String dateTo) {
-//        try {
-//
-//        } catch ()
         Event event = new Event(description, dateFrom, dateTo);
         int before = getTotalTasks();
         tasks.add(event);
