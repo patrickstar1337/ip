@@ -64,7 +64,12 @@ public class Parser {
             String dateTo = s[2].substring(3);
             return roko.addEvent(description, dateFrom, dateTo);
         } else if (command.equalsIgnoreCase("delete")) {
-            int id = Integer.parseInt(c.split(" ")[1]) - 1;
+            int id = 0;
+            try {
+                id = Integer.parseInt(c.split(" ")[1]) - 1;
+            } catch (NumberFormatException e) {
+                return "Please enter a valid integer!";
+            }
             return roko.delete(id);
         } else if (command.equalsIgnoreCase("find")) {
             return roko.findByKeyword(c.split(" ")[1]);
