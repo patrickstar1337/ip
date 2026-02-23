@@ -11,6 +11,10 @@ public class Parser {
 
     }
 
+    public void save() {
+        roko.save();
+    }
+
     /**
      * Parses the user's input into commands that are then executed.
      * @param c The user input String.

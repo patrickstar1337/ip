@@ -157,7 +157,6 @@ public class RokoBOT {
                 task.getStatusIcon() + "] " + task;
         ui.printMessage(message);
         assert !task.isDone : "task should NOT be done";
-        assert false;
         return message;
     }
 

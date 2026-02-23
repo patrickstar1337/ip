@@ -48,6 +48,7 @@ public class MainWindow extends AnchorPane {
         Parser parser = new Parser();
         String input = userInput.getText();
         String response = parser.parseCommand(input);
+        parser.save();
         if (input.equalsIgnoreCase("bye")) {
             Platform.exit();
         }
