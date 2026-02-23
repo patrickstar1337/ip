@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import roko.commands.undo.UndoAdd;
+import roko.commands.undo.UndoBuffer;
+import roko.commands.undo.UndoDelete;
+import roko.commands.undo.UndoMark;
 import roko.exception.RokoEmptyDescException;
 import roko.exception.RokoUnknownCommandException;
 import roko.storage.Storage;

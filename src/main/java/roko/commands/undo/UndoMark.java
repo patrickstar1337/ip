@@ -1,4 +1,6 @@
-package roko.ui;
+package roko.commands.undo;
+
+import roko.ui.TaskList;
 
 public class UndoMark implements UndoAction {
     private int index;
@@ -11,6 +13,6 @@ public class UndoMark implements UndoAction {
 
     @Override
     public void undo(TaskList tasks) {
-        tasks.getTaskById(index).isDone = previousIsDone;
+        tasks.getTaskById(index).setIsDone(previousIsDone);
     }
 }

@@ -1,4 +1,6 @@
-package roko.ui;
+package roko.commands.undo;
+
+import roko.ui.TaskList;
 
 public class UndoAdd implements UndoAction {
     @Override

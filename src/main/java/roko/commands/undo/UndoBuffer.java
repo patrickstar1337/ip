@@ -1,6 +1,8 @@
-package roko.ui;
+package roko.commands.undo;
 
 import java.util.Stack;
+
+import roko.ui.TaskList;
 
 public class UndoBuffer {
     private Stack<UndoAction> actions = new Stack<>();

@@ -1,4 +1,7 @@
-package roko.ui;
+package roko.commands.undo;
+
+import roko.ui.Task;
+import roko.ui.TaskList;
 
 public class UndoDelete implements UndoAction{
     private int index;
