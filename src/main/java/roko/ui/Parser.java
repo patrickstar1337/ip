@@ -41,8 +41,14 @@ public class Parser {
             return roko.printAllTasks();
         } else if (command.equalsIgnoreCase("deadline")) {
             String[] s = c.substring(9).split("/");
-            String description = s[0].substring(0, s[0].length() - 1);
-            String date = s[1].substring(3);
+            String description = "";
+            String date = "";
+            try {
+                description = s[0].substring(0, s[0].length() - 1);
+                date = s[1].substring(3);
+            } catch (Exception e) {
+                return "Please enter valid command (deadline [keyword] /by [yyyy-mm-dd])";
+            }
             return roko.addDeadline(description, date);
         } else if (command.equalsIgnoreCase("event")) {
             String[] s = c.substring(6).split("/");

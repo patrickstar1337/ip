@@ -1,6 +1,7 @@
 package roko.ui;
 
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -91,14 +92,19 @@ public class RokoBOT {
      * @param date The deadline of the task.
      */
     public String addDeadline(String description, String date) {
-        Deadline deadline = new Deadline(description, date);
-        int before = getTotalTasks();
-        tasks.add(deadline);
-        String message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
-                deadline.getTaskType(), deadline.getStatusIcon(), deadline.description, getTotalTasks());
-        ui.printMessage(message);
-        undoBuffer.push(new UndoAdd());
-        assert getTotalTasks() == before + 1 : "adding a task should increase it by 1";
+        String message = "";
+        try {
+            Deadline deadline = new Deadline(description, date);
+            int before = getTotalTasks();
+            tasks.add(deadline);
+            message = String.format("Got it. I've added this task:\n[%s][%s] %s\nNow you have %o tasks",
+                    deadline.getTaskType(), deadline.getStatusIcon(), deadline.description, getTotalTasks());
+            ui.printMessage(message);
+            undoBuffer.push(new UndoAdd());
+            assert getTotalTasks() == before + 1 : "adding a task should increase it by 1";
+        } catch (DateTimeParseException e) {
+            return "Please enter date in format (yyyy-mm-dd)";
+        }
         return message;
     }
 
@@ -109,6 +115,9 @@ public class RokoBOT {
      * @param dateTo The ending date.
      */
     public String addEvent(String description, String dateFrom, String dateTo) {
+//        try {
+//
+//        } catch ()
         Event event = new Event(description, dateFrom, dateTo);
         int before = getTotalTasks();
         tasks.add(event);
